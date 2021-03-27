@@ -96,7 +96,7 @@ class DDrive extends Component{
     }
 
     display = async(event) => {
-        const [Sent,setSent] = useState([]);
+
         event.preventDefault();
         this.setState({count: 0})
         try {
@@ -104,7 +104,6 @@ class DDrive extends Component{
             console.log(output);
             const requestCount = output.length;
             this.setState({count: requestCount});
-            setSent(output);
         } catch (error) {
             
         }
