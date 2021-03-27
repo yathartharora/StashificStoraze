@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import Layout from '../Components/Layout'
 import HeadText from '../Components/Heading';
-import {Grid, Button, Form, Input, Message} from 'semantic-ui-react';
+import {Grid, Button, Form, Input, Message, Table} from 'semantic-ui-react';
 import drive from '../Ethereum/drive';
 import web3 from '../Ethereum/web3';
 import ipfs from '../ipfs'
+import RequestRow from '../Components/requestrow';
 
 class DDrive extends Component{
 
@@ -20,7 +21,8 @@ class DDrive extends Component{
             ipfsHash: '',
             active: 'False',
             sender: '',
-            passcode: ''
+            passcode: '',
+            count: 0
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.captureFile = this.captureFile.bind(this);
@@ -94,18 +96,25 @@ class DDrive extends Component{
     }
 
     display = async(event) => {
+        const [Sent,setSent] = useState([]);
         event.preventDefault();
+        this.setState({count: 0})
         try {
             const output = await drive.methods.display(this.state.sender,this.state.passcode).call()
-            console.log(output[0]);
+            console.log(output);
             const requestCount = output.length;
+            this.setState({count: requestCount});
+            setSent(output);
         } catch (error) {
             
         }
+        
     }
+
 
     render(){
 
+        const {Header, Row, HeaderCell, Body} = Table;
         return(
             <Layout>
                 <HeadText />
@@ -182,6 +191,24 @@ class DDrive extends Component{
 
                     </Grid.Column>
                 </Grid>
+
+                {/* <Message 
+                 header = "Your Files"
+                 size= "huge"
+                />
+                <Message size="huge">
+                    <Table celled>
+                        <Header>
+                            <Row>
+                                <HeaderCell>Name of the File</HeaderCell>
+                                <HeaderCell>File Link</HeaderCell>
+                            </Row>
+                        </Header>
+                        <Body>
+                        
+                        </Body>
+                    </Table>
+                </Message> */}
             </Layout>
         )
     }
