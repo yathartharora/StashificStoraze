@@ -237,7 +237,7 @@ class DDrive extends Component{
                         <Message.Header>In case of queries/suggestions write to me at:</Message.Header>
                                 <br></br>
                                 <a href={`https://twitter.com/YatharthArora8`}><Icon name="twitter" size="huge" /></a>
-                                <a><Icon name="mail" size="huge" /></a>
+                                <a href="mailto: yathartharora1999@gmail.com"><Icon name="mail" size="huge" /></a>
                                 <a href={`https://github.com/yathartharora`}><Icon name="github" size="huge" /></a>
                                 <a href={`https://www.linkedin.com/in/yathartharora/`}><Icon name="linkedin" size="huge" /></a>
                         </Message>
