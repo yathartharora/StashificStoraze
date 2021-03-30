@@ -26,7 +26,7 @@ const HeaderExampleTextAlignment = () => (
         </Segment>
         </div>
         <Header.Subheader>
-            "Delivering Unlimited Storage at your doorstep"
+            "Delivering Unlimited and decentralized Storage at your doorstep"
         </Header.Subheader>
     </Header>
 )
