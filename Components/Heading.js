@@ -16,17 +16,17 @@ const HeaderExampleTextAlignment = () => (
         </Segment>
         <Segment circular inverted style={square}>
             <Header as='h1'>
-                DECENTRALISED
+                STASHIFIC
             </Header>
         </Segment>
         <Segment circular style={square}>
             <Header as='h1'>
-                DRIVE
+                STORAZE
             </Header>
         </Segment>
         </div>
         <Header.Subheader>
-            "Enjoy Unlimited Storage"
+            "Delivering Unlimited Storage at your doorstep"
         </Header.Subheader>
     </Header>
 )

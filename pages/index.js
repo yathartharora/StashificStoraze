@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Layout from '../Components/Layout'
 import HeadText from '../Components/Heading';
-import {Grid, Button, Form, Input, Message, Table} from 'semantic-ui-react';
+import {Grid, Button, Form, Input, Message, Table, Icon} from 'semantic-ui-react';
 import drive from '../Ethereum/drive';
 import web3 from '../Ethereum/web3';
 import ipfs from '../ipfs'
@@ -124,10 +124,23 @@ class DDrive extends Component{
             <Layout>
                 <HeadText />
                 <br></br>
-                <Grid columns={3} divided padded relaxed stretched>
+                <Message>
+                    <div style={{fontSize: 30, fontWeight:'bolder'}}>
+                    About
+                    </div>
+                    <br></br>
+                    <div style={{fontSize: 22}}>
+                    <p>Delivering unlimited storage with complete privacy at your doorstep. Setup your MetaMask and get started now! DM's are always open for suggestions and reviews </p>
+                    </div>
+                    
+                </Message>
+                <Grid columns={3} divided padded stretched>
                     <Grid.Column>
-
-                    <h4>Register To Start Uploading Files</h4>
+                    <div style={{fontSize: 30, fontWeight:'bolder'}}>
+                        Register
+                    </div>
+                    <Message> 
+                    
                     <Form onSubmit={this.onSubmit}>
                         <Form.Field>
                             <label>Passcode</label>
@@ -137,15 +150,19 @@ class DDrive extends Component{
                              onChange = {event => this.setState({pass: event.target.value})}
                             />
                         </Form.Field>
-                        <Button primary loading={this.state.loading}>Register</Button>
+                        <Button primary loading={this.state.loading} secondary>Register</Button>
                     </Form>
+                    <br></br>
+                    <Message attached='bottom' warning>
+                    <Icon name='help' />
+                    Already registered? Start uploading
+                    </Message>
 
-                    <Message 
-                         size="huge"
-                         icon="file"
-                         header="My Files"
-                        />
-                        <Message>
+                    </Message>
+                    <div style={{fontSize: 30, fontWeight:'bolder'}}>
+                        My Files
+                    </div>
+                        <Message  size="huge">
                             <Form onSubmit={this.display}>
                                 <Form.Field>
                                 <label><Message.Header>Address</Message.Header></label>
@@ -159,18 +176,16 @@ class DDrive extends Component{
                                      onChange = {event => this.setState({passcode: event.target.value})}
                                     />
                                 </Form.Field>
-                                <Button>Display</Button>
+                                <Button secondary>Display</Button>
                             </Form>
                         </Message>
                     
                     </Grid.Column>
 
                     <Grid.Column >
-                        <Message 
-                         header="Upload To Drive" 
-                         icon="inbox"
-                         size="huge"
-                        />
+                    <div style={{fontSize: 30, fontWeight:'bolder'}}>
+                        Upload
+                    </div>
                         <Message size="huge">
                             <Form onSubmit={this.onsubmit}>
                                 <Form.Field>
@@ -192,7 +207,7 @@ class DDrive extends Component{
                                      onChange = {event => this.setState({format: event.target.value})} 
                                     />
                                 </Form.Field>
-                                <Button onClick={this.generate}>Upload</Button>
+                                <Button onClick={this.generate} secondary>Upload</Button>
                                 <br></br>
                                  <p>Uploaded Hash: {this.state.ipfsHash}</p>
                                 <br></br>
@@ -202,18 +217,37 @@ class DDrive extends Component{
 
                     </Grid.Column>
 
+                   
                     <Grid.Column>
+                    <div style={{fontSize: 30, fontWeight:'bolder'}}>
+                        Updates
+                    </div> 
+                    <Message>
+                        <div style={{fontSize: 20}}>
+                        <Message.List>
+                            <Message.Item>You can access Stashific only via chrome browser and after setting up your MetaMask</Message.Item>
+                            <Message.Item>MetaMask is an extension and pretty easy to set. Follow this <a href="https://youtu.be/yWfZnjkhhhg">tutorial</a> to setup your metamask.</Message.Item>
+                            <Message.Item>You will be able to download Stashific and upload your files soon via a Mobile App.</Message.Item>
+                            <Message.Item>Mobile App is currently in the development phase</Message.Item>
+                            <Message.Item>In the upcoming update, you will be able to share your files just like you do in Google Drive.</Message.Item>
+                        </Message.List>
+                        </div>
+                    </Message>
                         <Message>
-
+                        <Message.Header>In case of queries/suggestions write to me at:</Message.Header>
+                                <br></br>
+                                <a href={`https://twitter.com/YatharthArora8`}><Icon name="twitter" size="huge" /></a>
+                                <a><Icon name="mail" size="huge" /></a>
+                                <a href={`https://github.com/yathartharora`}><Icon name="github" size="huge" /></a>
+                                <a href={`https://www.linkedin.com/in/yathartharora/`}><Icon name="linkedin" size="huge" /></a>
                         </Message>
                     </Grid.Column>
                 </Grid>
 
-             <Message 
-                 header = "Your Files"
-                 size= "huge"
-                />
                 <Message size="huge">
+                    <div style={{fontSize: 30, fontWeight:'bolder'}}>
+                        Files
+                    </div>
                     <Table celled>
                         <Header>
                             <Row>
