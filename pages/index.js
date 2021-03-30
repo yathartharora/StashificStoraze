@@ -5,13 +5,14 @@ import {Grid, Button, Form, Input, Message, Table} from 'semantic-ui-react';
 import drive from '../Ethereum/drive';
 import web3 from '../Ethereum/web3';
 import ipfs from '../ipfs'
-import RequestRow from '../Components/requestrow';
+import {Link} from '../routes';
 
 class DDrive extends Component{
 
     constructor(){
         super();
         this.state={
+            displayoutput:[],    
             pass: '',
             loading: false,
             name: '',
@@ -22,7 +23,9 @@ class DDrive extends Component{
             active: 'False',
             sender: '',
             passcode: '',
-            count: 0
+            count: 0,
+            format: '',
+            currentDateTime: Date().toLocaleString()
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.captureFile = this.captureFile.bind(this);
@@ -55,7 +58,7 @@ class DDrive extends Component{
             const accounts = await web3.eth.getAccounts();
             console.log(accounts[0]);
             const key = 'https://ipfs.io/ipfs/' + this.state.ipfsHash;
-            await drive.methods.upload(this.state.name, key).send({
+            await drive.methods.upload(this.state.name, key, this.state.currentDateTime,this.state.format).send({
                 from: accounts[0],
                 gas: '1000000'
             })
@@ -100,8 +103,11 @@ class DDrive extends Component{
         event.preventDefault();
         this.setState({count: 0})
         try {
-            const output = await drive.methods.display(this.state.sender,this.state.passcode).call()
+            const output = await drive.methods.display(this.state.sender,'0x'+ this.state.passcode).call()
             console.log(output);
+            this.setState({displayoutput:output})
+            console.log("display output"+ this.state.displayoutput)
+            
             const requestCount = output.length;
             this.setState({count: requestCount});
         } catch (error) {
@@ -113,13 +119,13 @@ class DDrive extends Component{
 
     render(){
 
-        const {Header, Row, HeaderCell, Body} = Table;
+        const {Header, Row, HeaderCell, Body, Cell} = Table;
         return(
             <Layout>
                 <HeadText />
                 <br></br>
-                <Grid columns={2}>
-                    <Grid.Column width={6} floated="left">
+                <Grid columns={3} divided padded relaxed stretched>
+                    <Grid.Column>
 
                     <h4>Register To Start Uploading Files</h4>
                     <Form onSubmit={this.onSubmit}>
@@ -159,7 +165,7 @@ class DDrive extends Component{
                     
                     </Grid.Column>
 
-                    <Grid.Column widescreen={6}>
+                    <Grid.Column >
                         <Message 
                          header="Upload To Drive" 
                          icon="inbox"
@@ -179,6 +185,12 @@ class DDrive extends Component{
                                      type = 'file'
                                      onChange = {this.captureFile}
                                     />
+
+                                    <label>File Format</label>
+                                    <Input
+                                     value = {this.state.format}
+                                     onChange = {event => this.setState({format: event.target.value})} 
+                                    />
                                 </Form.Field>
                                 <Button onClick={this.generate}>Upload</Button>
                                 <br></br>
@@ -189,9 +201,15 @@ class DDrive extends Component{
                         </Message>
 
                     </Grid.Column>
+
+                    <Grid.Column>
+                        <Message>
+
+                        </Message>
+                    </Grid.Column>
                 </Grid>
 
-                {/* <Message 
+             <Message 
                  header = "Your Files"
                  size= "huge"
                 />
@@ -200,17 +218,25 @@ class DDrive extends Component{
                         <Header>
                             <Row>
                                 <HeaderCell>Name of the File</HeaderCell>
-                                <HeaderCell>File Link</HeaderCell>
+                                <HeaderCell>Link</HeaderCell>
+                                <HeaderCell>Date Modified</HeaderCell>
+                                <HeaderCell>File Format</HeaderCell>
                             </Row>
                         </Header>
                         <Body>
-                        
+                        {this.state.displayoutput.map((d) => (
+                            <Row>
+                              <Cell>{d[0]}</Cell>
+                              <Cell><a href={d[1]}>Click here</a></Cell>
+                              <Cell>{d[2]}</Cell>
+                              <Cell>{d[3]}</Cell>
+                            </Row>
+                        ))}
                         </Body>
                     </Table>
-                </Message> */}
+                </Message> 
             </Layout>
-        )
+        )}
     }
-}
 
-export default DDrive;
+    export default DDrive;
