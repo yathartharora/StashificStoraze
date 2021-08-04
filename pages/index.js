@@ -225,10 +225,8 @@ class DDrive extends Component{
                     <Message>
                         <div style={{fontSize: 20}}>
                         <Message.List>
-                            <Message.Item>You can access Stashific only via chrome browser and after setting up your MetaMask</Message.Item>
+                            <Message.Item>You can access Stashific only via a browser which has a Metamask extension.</Message.Item>
                             <Message.Item>MetaMask is an extension and pretty easy to set. Follow this <a href="https://youtu.be/yWfZnjkhhhg">tutorial</a> to setup your metamask.</Message.Item>
-                            <Message.Item>You will be able to download Stashific and upload your files soon via a Mobile App.</Message.Item>
-                            <Message.Item>Mobile App is currently in the development phase</Message.Item>
                             <Message.Item>In the upcoming update, you will be able to share your files just like you do in Google Drive.</Message.Item>
                         </Message.List>
                         </div>
